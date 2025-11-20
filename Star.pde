@@ -1,4 +1,4 @@
-public class Star //note that this class does NOT extend Floater
+class Star //note that this class does NOT extend Floater
 {
  int x;
  int y;
