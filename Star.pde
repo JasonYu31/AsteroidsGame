@@ -1,4 +1,4 @@
-class Star //note that this class does NOT extend Floater
+private class Star //note that this class does NOT extend Floater
 {
  int x;
  int y;
@@ -11,7 +11,7 @@ class Star //note that this class does NOT extend Floater
     size=(int)(Math.random()*10);
   }
 
-void show(){
+public void show(){
   stroke(myColor);
   ellipse(x,y,size,size);
   }
