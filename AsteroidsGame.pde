@@ -1,6 +1,7 @@
 Spaceship bob;
 Star[]craig= new Star[50];
 ArrayList <Asteroid> rocks = new ArrayList <Asteroid>();
+ArrayList <Bullet> shots= new ArrayList<Bullet>();
 public void setup() 
 {
   size(800,800);
@@ -19,6 +20,12 @@ public void draw() {
   }
   bob.move();
   bob.show();
+ 
+ for(int i= shots.size()-1; i>=0; i--){
+    Bullet b = shots.get(i);
+    b.move();
+    b.show();
+  }
   
   for(int i=rocks.size()-1;i>=0;i--){
   Asteroid a= rocks.get(i);
@@ -30,8 +37,21 @@ public void draw() {
       a.show();
     }
   }
-}
 
+    for(int i= shots.size()-1; i>=0; i--){
+      Bullet b = shots.get(i);
+      for(int j= rocks.size()-1; j>=0; j--){
+        Asteroid a= rocks.get(j);
+        float d= dist((float)b.getX(), (float)b.getY(), (float)a.getX(), (float)a.getY());
+        if(d<20){
+          shots.remove(i);
+          rocks.remove(j);
+          break;
+        }
+      }
+    }
+}
+        
 void keyPressed(){
   if(key=='a'||key=='A'){
   bob.turn(-10);
@@ -41,8 +61,11 @@ void keyPressed(){
   }
   if(key=='w'||key=='W'){
   bob.accelerate(0.5);
-    }
+   }
   if(key=='h'||key=='H'){
-    bob.hyperspace();
+   bob.hyperspace();
+  }
+  if(key == ' '){
+  shots.add(new Bullet(bob));
   }
 }
